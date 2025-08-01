@@ -1,0 +1,21 @@
+.dashboard-container {
+    background-color: #ffffff;
+    margin: 50px auto;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    max-width: 500px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+.dashboard-container h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.info {
+    margin: 15px 0;
+    font-size: 18px;
+    color: #444;
+}

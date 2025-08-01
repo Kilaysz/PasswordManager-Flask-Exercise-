@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register - Password Manager</title>
+    <link rel="stylesheet" href="static/style_register.css">
+</head>
+<body>
+
+<div class="register-container">
+    <h2>Register</h2>
+
+    {% if message %}
+        <div class="message">{{ message }}</div>
+    {% endif %}
+
+    <form method="POST">
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="password" name="password" placeholder="Password" id="password" required>
+        <div id="strength"></div>
+        <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+        <button type="submit">Register</button>
+    </form>
+
+    <script>
+        const passwordInput = document.getElementById("password");
+        const strengthDisplay = document.getElementById("strength");
+
+        passwordInput.addEventListener("input", () => {
+            fetch("/check-strength", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ password: passwordInput.value })
+            })
+            .then(response => response.json())
+            .then(data => {
+                let color = "red";
+                if (data.strength === "Medium") color = "orange";
+                else if (data.strength === "Strong") color = "green";
+
+                strengthDisplay.textContent = "Strength: " + data.strength;
+                strengthDisplay.style.color = color;
+            });
+        });
+    </script>
+
+    <div class="login-link">
+        Already have an account? <a href="/">Log in</a>
+    </div>
+</div>
+
+
+</body>
+</html>
